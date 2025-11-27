@@ -1,5 +1,8 @@
 const express = require("express");
-const cors=require('cors')
+const cors=require('cors');
+const router = require("./routes");
+
+
 
 
 const server = new express();
@@ -13,9 +16,10 @@ server.use(cors())
 //midlleWare to parse
 server.use(express.json());
 
-server.get("/getDetails", (req, res) => {
-  res.status(200).json({ message: "recived" });
-});
+
+server.use(router)
+
+
 
 server.listen(PORT, () => {
   console.log(PORT);

@@ -4,4 +4,4 @@ const mongoose=require('mongoose')
     console.log('connected to mongoDB')
  }).catch((err)=>{
     console.log(err)
- })
+ }) 

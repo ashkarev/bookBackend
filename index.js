@@ -1,4 +1,6 @@
+require('dotenv').config()
 
+//the datya inside the .env can access the entire applicarion
 require('./dbConfig')
 
 const express = require("express");

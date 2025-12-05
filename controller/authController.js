@@ -11,10 +11,10 @@ exports.registerUser= async(req,res)=>{
         
        let existingUser=await userModel.findOne({email:email})
         if(existingUser){
-            res.status(409).json({message:'useer Already regiseterd'})
+            res.status(409).json({message:'user Already regiseterd'})
         }else{
             let newUser=new userModel({userName,email,password})
-            newUser.save()
+          await  newUser.save()
             res.status(201).json({message:' new user added',newUser})
         }
 
@@ -26,6 +26,8 @@ exports.registerUser= async(req,res)=>{
         }
         
     } catch (error) {
+        console.log(error)
         res.status(500).json({message:'Something Went Wrong in the Server'})
+        console.log(error)
     }
 }

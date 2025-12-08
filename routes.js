@@ -6,6 +6,6 @@ const router=new express.Router()
 
 router.post('/registerUser',authController.registerUser)
 
-
+router.post('/loginUser',authController.loginUser)
 
 module.exports=router

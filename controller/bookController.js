@@ -1,6 +1,8 @@
 const bookModel = require("../model/bookModel");
 
 exports.AddBookController = async (req, res) => {
+
+    console.log(req.user)
   try {
     let {
       title,
@@ -19,6 +21,7 @@ exports.AddBookController = async (req, res) => {
 
     //userMail comes from the token
     let userMail = req.user;
+
 
     if (
       title &&
@@ -56,6 +59,8 @@ exports.AddBookController = async (req, res) => {
       uploadedImages,userMail
 
         })
+        await newBook.save()
+        res.status(201).json({message:'successfully Added',newBook})
       }
     } else {
       res.status(500).json({ message: "Fields are empty" });

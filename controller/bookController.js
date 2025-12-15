@@ -16,8 +16,14 @@ exports.AddBookController = async (req, res) => {
       language,
       ISBN,
       category,
-      uploadedImages,
+      // uploadedImages,//0 that are uploaded only available at req.files
     } = req.body;
+
+
+    let imageArray=[]
+    req.files.forEach((eachFile)=>imageArray.push(eachFile.filename))
+
+    // console.log(files)
 
     //userMail comes from the token
     let userMail = req.user;
@@ -34,8 +40,8 @@ exports.AddBookController = async (req, res) => {
       publisher &&
       language &&
       ISBN &&
-      category &&
-      uploadedImages
+      category
+      // uploadedImages
     ) {
       let existingUser = await bookModel.findOne({ title: title });
       if (existingUser) {
@@ -56,7 +62,8 @@ exports.AddBookController = async (req, res) => {
       language,
       ISBN,
       category,
-      uploadedImages,userMail
+      uploadedImages:imageArray,
+      userMail
 
         })
         await newBook.save()
@@ -70,3 +77,42 @@ exports.AddBookController = async (req, res) => {
     res.status(500).json({ message: "some issue happen in server" });
   }
 };
+
+
+exports.getAllBookController=async(req,res)=>{
+  try {
+    let BookData=await bookModel.find()
+    res.status(200).json({message:'book fetched Successfully ',BookData})
+    
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({message:'server error happened'})
+  }
+}
+
+exports.getSixBookController=async(req,res)=>{
+  try {
+    let limitedBookData=await bookModel.find().limit(6)
+    res.status(200).json({message:'succesfuly fetched six book',limitedBookData})
+
+
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({message:'server error happened'})
+  }
+}
+
+
+exports.getSingleBookController=async(req,res)=>{
+  try {
+
+    let id=req.params.id
+    let SinglebookData=await bookModel.findById({_id:id})
+    res.status(200).json({SinglebookData})
+    
+  } catch (error) {
+     console.log(error)
+    res.status(500).json({message:'server error happened'})
+  }
+}

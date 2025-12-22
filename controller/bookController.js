@@ -1,8 +1,7 @@
 const bookModel = require("../model/bookModel");
 
 exports.AddBookController = async (req, res) => {
-
-    console.log(req.user)
+  console.log(req.user);
   try {
     let {
       title,
@@ -19,15 +18,13 @@ exports.AddBookController = async (req, res) => {
       // uploadedImages,//0 that are uploaded only available at req.files
     } = req.body;
 
-
-    let imageArray=[]
-    req.files.forEach((eachFile)=>imageArray.push(eachFile.filename))
+    let imageArray = [];
+    req.files.forEach((eachFile) => imageArray.push(eachFile.filename));
 
     // console.log(files)
 
     //userMail comes from the token
     let userMail = req.user;
-
 
     if (
       title &&
@@ -50,24 +47,23 @@ exports.AddBookController = async (req, res) => {
       } else {
         //proceed
 
-        let newBook=new bookModel({
-            title,
-      author,
-      noOfPage,
-      imgUrl,
-      price,
-      discountPrice,
-      abstract,
-      publisher,
-      language,
-      ISBN,
-      category,
-      uploadedImages:imageArray,
-      userMail
-
-        })
-        await newBook.save()
-        res.status(201).json({message:'successfully Added',newBook})
+        let newBook = new bookModel({
+          title,
+          author,
+          noOfPage,
+          imgUrl,
+          price,
+          discountPrice,
+          abstract,
+          publisher,
+          language,
+          ISBN,
+          category,
+          uploadedImages: imageArray,
+          userMail,
+        });
+        await newBook.save();
+        res.status(201).json({ message: "successfully Added", newBook });
       }
     } else {
       res.status(500).json({ message: "Fields are empty" });
@@ -78,41 +74,45 @@ exports.AddBookController = async (req, res) => {
   }
 };
 
-
-exports.getAllBookController=async(req,res)=>{
+exports.getAllBookController = async (req, res) => {
   try {
-    let BookData=await bookModel.find()
-    res.status(200).json({message:'book fetched Successfully ',BookData})
-    
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({message:'server error happened'})
-  }
-}
+    let searchKey = req.query.search;
 
-exports.getSixBookController=async(req,res)=>{
+    let query = {
+      title: {
+        $regex: searchKey,//for seatrchinng
+
+        $options: "i",//case Sensitive
+      },
+    };
+
+    let BookData = await bookModel.find(query);
+    res.status(200).json({ message: "book fetched Successfully ", BookData });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "server error happened" });
+  }
+};
+
+exports.getSixBookController = async (req, res) => {
   try {
-    let limitedBookData=await bookModel.find().limit(6)
-    res.status(200).json({message:'succesfuly fetched six book',limitedBookData})
-
-
-
+    let limitedBookData = await bookModel.find().limit(4);
+    res
+      .status(200)
+      .json({ message: "succesfuly fetched six book", limitedBookData });
   } catch (error) {
-    console.log(error)
-    res.status(500).json({message:'server error happened'})
+    console.log(error);
+    res.status(500).json({ message: "server error happened" });
   }
-}
+};
 
-
-exports.getSingleBookController=async(req,res)=>{
+exports.getSingleBookController = async (req, res) => {
   try {
-
-    let id=req.params.id
-    let SinglebookData=await bookModel.findById({_id:id})
-    res.status(200).json({SinglebookData})
-    
+    let id = req.params.id;
+    let SinglebookData = await bookModel.findById({ _id: id });
+    res.status(200).json({ SinglebookData });
   } catch (error) {
-     console.log(error)
-    res.status(500).json({message:'server error happened'})
+    console.log(error);
+    res.status(500).json({ message: "server error happened" });
   }
-}
+};

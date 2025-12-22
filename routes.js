@@ -30,4 +30,6 @@ router.get('/getSixBooks',bookController.getSixBookController)
 
 router.get('/getSingleBook/:id',jwtMiddleware,bookController.getSingleBookController)
 
+
+
 module.exports=router

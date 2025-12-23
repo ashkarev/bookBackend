@@ -4,7 +4,7 @@ const jwtMiddleware = require('./middlewares/jwtMiddleware')
 const  bookController  = require('./controller/bookController')
 const multerConfig = require('./middlewares/multerMiddleware')
 
-
+const userController=require('./controller/userController')
 
 const router=new express.Router()
 
@@ -30,6 +30,10 @@ router.get('/getSixBooks',bookController.getSixBookController)
 
 router.get('/getSingleBook/:id',jwtMiddleware,bookController.getSingleBookController)
 
+router.get('/userdetails',jwtMiddleware,userController.getUserDetails)
 
+router.patch('/:id/updateProfile',jwtMiddleware,multerConfig.single('proPic'),userController.updateProfile)
+
+router.get('/AllUsers',jwtMiddleware,userController.getAllUsers)
 
 module.exports=router

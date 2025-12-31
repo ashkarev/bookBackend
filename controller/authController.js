@@ -49,7 +49,7 @@ exports.loginUser = async (req, res) => {
 
         let token = jwt.sign(payload, process.env.jwtSecretKey);
 
-        res.status(200).json({ message: "successfully  registerd", token });
+        res.status(200).json({ message: "successfully  registerd", token,existingUser });
       } else {
         res.status(400).json({ message: "Invalid Passwrod" });
       }
@@ -78,7 +78,7 @@ exports.googleLoginApi = async (req, res) => {
 
       let token = jwt.sign(payload, process.env.jwtSecretKey);
 
-      res.status(200).json({ message: "successfully  registerd", token });
+      res.status(200).json({ message: "successfully  registerd", token ,existingUser });
     } else {
       //register Logic
 

@@ -37,7 +37,7 @@ exports.updateProfile = async (req, res) => {
 exports.getAllUsers=async(req,res)=>{
 try {
 
-  let allUsers=await userModel.find()
+  let allUsers=await userModel.find({userType:{$ne:'admin'}}).select('-password')
   res.status(200).json({allUsers})
 
 

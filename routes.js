@@ -7,6 +7,8 @@ const multerConfig = require('./middlewares/multerMiddleware')
 const userController=require('./controller/userController')
 const jwtAdminMidlleware = require('./middlewares/jwtAdminMidlleware')
 
+const jobController=require('./controller/jobController')
+
 
 
 const router=new express.Router()
@@ -38,5 +40,9 @@ router.get('/userdetails',jwtMiddleware,userController.getUserDetails)
 router.patch('/:id/updateProfile',jwtMiddleware,multerConfig.single('proPic'),userController.updateProfile)
 
 router.get('/AllUsers',jwtAdminMidlleware,userController.getAllUsers)
+
+
+
+router.post('/addJob',jwtAdminMidlleware,jobController.addjob)
 
 module.exports=router

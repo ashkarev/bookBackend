@@ -44,5 +44,9 @@ router.get('/AllUsers',jwtAdminMidlleware,userController.getAllUsers)
 
 
 router.post('/addJob',jwtAdminMidlleware,jobController.addjob)
+router.get('/getAllJobs',jobController.getJobs)
+
+
+router.delete('/:id/deleteJob',jwtAdminMidlleware,jobController.deleteJob)
 
 module.exports=router

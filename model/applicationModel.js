@@ -19,7 +19,7 @@ const applicationSchema=mongoose.Schema({
         type:String,
         required:true
     }, 
-     fullName:{
+     resume:{
         type:String,
         required:true
     },

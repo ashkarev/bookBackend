@@ -80,9 +80,9 @@ exports.getAllBookController = async (req, res) => {
 
     let query = {
       title: {
-        $regex: searchKey,//for seatrchinng
+        $regex: searchKey, //for seatrchinng
 
-        $options: "i",//case Sensitive
+        $options: "i", //case Sensitive
       },
     };
 

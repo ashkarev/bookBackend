@@ -26,6 +26,6 @@ const filefilter = (req, file, callback) => {
   }
 };
 
-const resumeMulterConfig = multer({ storage, fileFilter });
+const resumeMulterConfig = multer({ storage, filefilter });
 
 module.exports = resumeMulterConfig;

@@ -9,6 +9,11 @@ const jwtAdminMidlleware = require('./middlewares/jwtAdminMidlleware')
 
 const jobController=require('./controller/jobController')
 
+const applicationController=require('./controller/applicationController')
+const resumeMulterConfig = require('./middlewares/resumeMulterMiddleware')
+
+
+
 
 
 const router=new express.Router()
@@ -48,5 +53,13 @@ router.get('/getAllJobs',jobController.getJobs)
 
 
 router.delete('/:id/deleteJob',jwtAdminMidlleware,jobController.deleteJob)
+
+
+
+//for career 
+
+router.post('/applyJob',resumeMulterConfig.single('resume'),applicationController.ApplyJob)
+router.get('/getAllApplication',jwtAdminMidlleware,applicationController.getJob)
+
 
 module.exports=router

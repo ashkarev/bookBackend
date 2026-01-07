@@ -1,0 +1,26 @@
+const { default: mongoose } = require('mongoose')
+const momgoose=require('mongoose')
+// import mongoose
+
+
+
+// schema create
+
+const applicationSchema=mongoose.Schema({
+    fullName:{
+        type:String,
+        required:true
+    },
+      phone:{
+        type:Number,
+        required:true
+    },
+      email:{
+        type:String,
+        required:true
+    }, 
+     fullName:{
+        type:String,
+        required:true
+    }
+})

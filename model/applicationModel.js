@@ -24,3 +24,9 @@ const applicationSchema=mongoose.Schema({
         required:true
     }
 })
+
+//model
+
+const applicationModel=mongoose.model('applications',applicationSchema)
+
+module.exports=applicationModel

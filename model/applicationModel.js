@@ -22,7 +22,15 @@ const applicationSchema=mongoose.Schema({
      fullName:{
         type:String,
         required:true
-    }
+    },
+     jobId:{
+        type:String,
+        required:true
+    },
+     jobTitle:{
+        type:String,
+        required:true
+    },
 })
 
 //model

@@ -12,6 +12,8 @@ const jobController=require('./controller/jobController')
 const applicationController=require('./controller/applicationController')
 const resumeMulterConfig = require('./middlewares/resumeMulterMiddleware')
 
+const purchaseController=require('./controller/purchaseController')
+
 
 
 
@@ -60,6 +62,11 @@ router.delete('/:id/deleteJob',jwtAdminMidlleware,jobController.deleteJob)
 
 router.post('/applyJob',resumeMulterConfig.single('resume'),applicationController.ApplyJob)
 router.get('/getAllApplication',jwtAdminMidlleware,applicationController.getJob)
+
+//stripe
+
+router.post('/buyBook',jwtMiddleware,purchaseController.purchaseDetails)
+
 
 
 module.exports=router

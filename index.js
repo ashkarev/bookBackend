@@ -17,7 +17,7 @@ server.use(cors());
 //midlleWare to parse
 server.use(express.json());
 
-server.use('/uploads',express.static('./uploads'))  //thus middleware used to share the resources
+server.use('/uploads',express.static('./uploads'))  //this middleware used to share the resources
 
 server.use(router);
 
